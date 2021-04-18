@@ -33,6 +33,8 @@ class bntree:public basic{
 
         int lca(node* root,int n1,int n2);
 
+        int lca2(node* root, int n1, int n2);
+
         bool get_path(vector<int> &v1, node* root, int val);
 
 };
@@ -54,6 +56,17 @@ int main(){
     cout<<"Enter nodes for which you have to find lowest common ancestor: ";
     cin>>n1>>n2;
     int answer = bt.lca(bt.give_root(), n1, n2);
+
+    if(answer != -1){
+        cout<<"LCA of "<<n1<<" and "<<n2<<" is "<<answer;
+    }
+    else{
+        cout<<"Both roots must be present in tree to find lca";
+    }
+
+    cout<<endl;
+
+    answer = bt.lca2(bt.give_root(), n1, n2);
 
     if(answer != -1){
         cout<<"LCA of "<<n1<<" and "<<n2<<" is "<<answer;
@@ -144,5 +157,33 @@ bool bntree::get_path(vector<int> &v1, node* root, int val){
         return true;
     }
     return false;
+
+}
+
+// It assumes that either both roots are present or none is present; It doesn't work when one node is present and other is not;
+int bntree::lca2(node* root, int n1,int n2){
+
+    if(root == NULL){
+        return -1;
+    }
+
+    int l = lca2(root->left,n1,n2);
+
+    int r = lca2(root->right, n1, n2);
+
+    if(l != -1 && r != -1){
+        return root->data;
+    }
+
+    if(root->data == n1  || root->data == n2){
+        return root->data;
+    }
+
+    if(l != -1){
+        return l;
+    }
+    else{
+        return r;
+    }
 
 }

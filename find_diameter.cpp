@@ -30,7 +30,7 @@ class bntree:public basic{
 
     public:
 
-        int find_diameter(node* root,node* first,int &m);
+        int find_diameter(node* root,int &m);
 
 };
 
@@ -47,7 +47,7 @@ int main(){
         bt.insert(x);
     }
     int m = 0;
-    int temp = bt.find_diameter(bt.give_root(),bt.give_root(),m);
+    int temp = bt.find_diameter(bt.give_root(),m);
     cout<<"Diameter is "<<m;
 
     return 0;
@@ -88,7 +88,7 @@ inline node* basic::give_root(){
 
 
 
-int bntree::find_diameter(node* root, node* first, int &m){
+int bntree::find_diameter(node* root,  int &m){
 
     if(root == NULL){
         return 0;
@@ -96,9 +96,9 @@ int bntree::find_diameter(node* root, node* first, int &m){
 
     int lh,rh;
 
-    lh = find_diameter(root->left , first,  m);
+    lh = find_diameter(root->left ,  m);
 
-    rh = find_diameter(root->right , first, m);
+    rh = find_diameter(root->right , m);
 
     int ans = 1+lh+rh;
     m = max(m, ans);
