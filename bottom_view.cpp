@@ -1,5 +1,5 @@
 /*
-    Given a binary tree, find top view;
+    Given a binary tree, find bottom view;
 */
 
 #include<iostream>
@@ -23,7 +23,7 @@ class bntree{
 
         node* make_btree(const vector<int> &vr, int n);
 
-        void top_view(node* root);
+        void bottom_view(node* root);
 
         
 
@@ -45,7 +45,7 @@ int main(){
     bntree bnt;
     node* root = bnt.make_btree( vr , n );
 
-    bnt.top_view(root);
+    bnt.bottom_view(root);
     
     return 0;
 }
@@ -91,7 +91,7 @@ node* bntree::make_btree(const vector<int> &vr , int n){
 }
 
 //use vertical traversal
-void bntree::top_view(node* root){
+void bntree::bottom_view(node* root){
 
     if(root == NULL){
         return ;
@@ -108,9 +108,7 @@ void bntree::top_view(node* root){
         node* curr = q.front().second;
         q.pop();
 
-        if(mp.find(lvl) == mp.end()){
             mp[lvl] = curr->data;
-        }
 
         if(curr->left != NULL){
             q.push({lvl-1, curr->left});
