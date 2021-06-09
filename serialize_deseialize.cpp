@@ -59,7 +59,8 @@ int main(){
 }
 
 void solution::srlz(vector<int> &vr , node* root){
-    begin:
+    for(int i = 0 ; i < 2 ; ++i){ // tail call optimization
+
         if(root == NULL){
             vr.push_back(-1);
             return ;
@@ -69,8 +70,8 @@ void solution::srlz(vector<int> &vr , node* root){
 
         srlz(vr, root->left);
 
-        root = root->right;
-        goto begin;
+        root = root->right; // tail call optimization
+    }
 
 }
 
